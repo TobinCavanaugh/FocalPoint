@@ -1,0 +1,28 @@
+<head>
+	<title>Simple Post Processing</title>
+	<meta name="viewport" content="width = device-height, initial-scale = 0.5">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../ppu_common/style.css">
+	<link rel="icon" type = "image/png" href="images/icon.png">	
+	<script type="text/javascript" src="../ppu_common//sidebar.js"></script>
+	<script type="text/javascript" src="../ppu_common/content.js"></script>
+	<script type="text/javascript" src="../contentLoader.js"></script>
+	<script>
+		setContentOnLoad(
+			"header", ppu["header_simple"],
+            "navigContent", ppu["navigation_misc"],
+            "content", ppu["content_misc"],
+			"footer", ppu["footer"]
+		)
+	</script>
+</head>
+<body>
+	<div id="header"></div>
+	<button id="openbtn" class="btn" onclick="openNav()">☰</button>
+	<div id="navigation">
+		<button id="closebtn" class="btn" onclick="closeNav()">X</button>
+		<ol id="navigContent"></ol>
+	</div>
+	<div id="content"></div>
+	<div id="footer"></div>
+</body>

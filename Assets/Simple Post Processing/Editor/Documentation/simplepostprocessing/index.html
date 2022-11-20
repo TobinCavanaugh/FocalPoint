@@ -1,0 +1,36 @@
+<head>
+	<title>Simple Post Processing</title>
+	<meta name="viewport" content="width = device-height, initial-scale = 0.5">
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="../ppu_common/style.css">
+	<link rel="icon" type = "image/png" href="images/icon.png">	
+	<script type="text/javascript" src="../ppu_common//sidebar.js"></script>
+	<script type="text/javascript" src="../ppu_common/content.js"></script>
+	<script type="text/javascript" src="../contentLoader.js"></script>
+	<script>
+		setContentOnLoad(
+			"header", ppu["header_simple"],
+			"footer", ppu["footer"]
+		)
+	</script>
+</head>
+<body>
+	<div id="header"></div>
+	<button id="openbtn" class="btn" onclick="openNav()">☰</button>
+	<div id="navigation">
+		<button id="closebtn" class="btn" onclick="closeNav()">X</button>
+		<ol>
+			<li><a href="#n1" class="na">Installation</a></li>
+		</ol>
+	</div>
+	<div id="content">
+		<a name = "n1"><h1>Installation</h1></a>
+		<hr>
+		<p>- Import Post Processing Stack v2 using Package Manager (very important!): Window -> Package Manager -> All -> Post Processing -> Install</p>
+		<p>- Download and import Simple Post Processing: Asset Store -> Import</p>
+		<p>- If Post Processing Stack is configured properly, You should be able to add processing effect to Post Processing Volume</p>
+		<img src = "images/home/selectEffect.png" class = "wide">
+		<p>Congratulations!</p>
+	</div>
+	<div id="footer"></div>
+</body>

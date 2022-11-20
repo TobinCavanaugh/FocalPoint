@@ -1,0 +1,21 @@
+.darkBackground {
+    background-color: #111;
+}
+
+.centered {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.smallMargin {
+    margin: 16px;
+}
+
+.rounded {
+    border-radius: 40%;
+}
+
+.shadowed {
+    box-shadow: 10px 10px 5px #000;
+}
