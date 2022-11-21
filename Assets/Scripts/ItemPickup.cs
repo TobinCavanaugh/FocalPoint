@@ -8,6 +8,7 @@ namespace DefaultNamespace
         public Vector3 rotOffset;
         public Vector3 positionOffset;
         public Vector3 scaleOffset = Vector3.one;
+        public string id;
 
         [HideInInspector]
         public Vector3 originalScale;
