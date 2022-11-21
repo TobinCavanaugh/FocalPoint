@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 6125723021270001251}
   - component: {fileID: 6983969239914556161}
   - component: {fileID: -8724375983538482921}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gas Can Destroyed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &6373622925844009410
 Transform:

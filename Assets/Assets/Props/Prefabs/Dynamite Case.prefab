@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 4799157951236983738}
   - component: {fileID: 8752080756321684011}
   - component: {fileID: 5228249627830698626}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dynamite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4799157951236983738
 Transform:
@@ -95,12 +95,12 @@ GameObject:
   - component: {fileID: 4130557103632847152}
   - component: {fileID: 4491010599600201686}
   - component: {fileID: 3011615348444696303}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Dynamite Case
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &3011615348444696302
 Transform:
@@ -193,12 +193,12 @@ GameObject:
   - component: {fileID: 5920170656831147072}
   - component: {fileID: 8339186208432231968}
   - component: {fileID: 3811889856832242860}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Split Case Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &5920170656831147072
 Transform:

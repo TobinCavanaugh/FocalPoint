@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 8041603577365553786}
   - component: {fileID: 5546630341313024779}
   - component: {fileID: 7014950422270046960}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Gas Can UnLabelled
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &7141994030982525652
 Transform:

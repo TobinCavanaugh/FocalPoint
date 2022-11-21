@@ -18,6 +18,13 @@ namespace DefaultNamespace
         {
             stepSound.pitch = 1 + Random.Range(-.3f, .3f);
             stepSound.Play();
-        } 
+        }
+
+        public ItemReactor ir;
+
+        public void IncrementItemReactor()
+        {
+            ir.Increment();
+        }
     }
 }

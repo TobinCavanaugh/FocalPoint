@@ -28,13 +28,17 @@ namespace DefaultNamespace
                 Destroy(pi.holdingItem);
                 pi.item = null;
                 pi.holdingItem = null;
-                curGasCan++;
-
-                if (curGasCan >= gasCanRequirement)
-                {
-                    fullEvent?.Invoke();
-                } 
             }
+        }
+
+        public void Increment()
+        {
+            curGasCan++;
+            
+            if (curGasCan >= gasCanRequirement)
+            {
+                fullEvent?.Invoke();
+            } 
         }
 
         public string GetText()

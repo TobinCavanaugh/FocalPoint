@@ -12,12 +12,13 @@ GameObject:
   - component: {fileID: 8520312033338526382}
   - component: {fileID: 6138027579979818777}
   - component: {fileID: 2692903175126920694}
-  m_Layer: 0
+  - component: {fileID: 7409377549852372710}
+  m_Layer: 8
   m_Name: Bench
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9049146575057182334
 Transform:
@@ -97,3 +98,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.6528018, y: 2.6556606, z: 0.58899003}
   m_Center: {x: -0.05204621, y: 0, z: 0.044495042}
+--- !u!114 &7409377549852372710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 962489731575049001}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e3fdca004f2d45fe8abbed571a8abd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OverrideArea: 1
+  m_Area: 1
+  m_IgnoreFromBuild: 0
+  m_AffectedAgents: ffffffff

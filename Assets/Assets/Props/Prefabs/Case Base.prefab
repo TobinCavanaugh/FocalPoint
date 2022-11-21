@@ -12,12 +12,12 @@ GameObject:
   - component: {fileID: 3424248096969375341}
   - component: {fileID: 9012785134705058074}
   - component: {fileID: 6978009526756819469}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Case Lid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &9186357674438026494
 Transform:
@@ -109,12 +109,12 @@ GameObject:
   - component: {fileID: 1530454851634150456}
   - component: {fileID: 5163457767448174032}
   - component: {fileID: 8115976499874286009}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Case Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &4979047884181118309
 Transform:

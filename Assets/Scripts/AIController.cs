@@ -29,6 +29,9 @@ namespace DefaultNamespace
         public float attackRange = 2f;
 
         private Vector3 previousPos;
+
+        public float defaultSpeed = 3.5f;
+        public float chaseSpeed = 5f;
         
         [ReadOnly]
         public float velocity;
@@ -60,7 +63,9 @@ namespace DefaultNamespace
                 animator.Play(roarAnimation);
                 agent.isStopped = true;
                 yield return new WaitForSeconds(Random.Range(5, 7));
-                
+
+                agent.isStopped = false;
+                agent.speed = chaseSpeed;
                 for (int i = 0; i < 100; i++)
                 {
                     Debug.Log($"chase {i}/99");
@@ -94,7 +99,7 @@ namespace DefaultNamespace
             
             agent.isStopped = false;
             agent.SetDestination(oldSeenPosition);
-
+            agent.speed = defaultSpeed;
             animator.SetFloat(Speed, velocity);
             
             yield return wfs;
