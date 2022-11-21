@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 
 namespace DefaultNamespace
 {
@@ -13,7 +14,7 @@ namespace DefaultNamespace
         public float curFocusDistance = 1f;
 
         public float lerpSpeed = 1f;
-        public PostProcessProfile ppp;
+        public VolumeProfile ppp;
         private DepthOfField dof;
 
         public AudioClip clickClip;
@@ -28,8 +29,8 @@ namespace DefaultNamespace
 
         private void Start()
         {
-            dof = ppp.GetSetting<DepthOfField>();
-
+            ppp.TryGet(out dof);
+            
             for (int i = 0; i < audioSourceCount; i++)
             {
                 var go = new GameObject().transform;
