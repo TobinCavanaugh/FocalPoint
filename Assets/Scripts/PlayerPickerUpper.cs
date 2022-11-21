@@ -1,6 +1,7 @@
 ﻿using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace DefaultNamespace
 {
@@ -17,6 +18,11 @@ namespace DefaultNamespace
         private void Update()
         {
             tmp.text = "";
+
+            if (Input.GetKey(KeyCode.R) && Input.GetKey(KeyCode.LeftControl))
+            {
+                SceneManager.LoadScene(0);
+            }
 
             
             if (Input.GetButtonDown("Drop"))
