@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization.Json;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -8,27 +9,30 @@ public class PlayerMovement : MonoBehaviour
     //instance variables (tweak these to change the feel of the player controller)
     public float walkingSpeed = 5f;
     public float sprintingSpeed = 10f; 
-    public float jumpingSpeed = 3f;
-    public float crouchingSpeed = 1f;
-    public float jumpForce = 200f;
     public float mouseSens = 15f; //can change to be X and Y sens if wanted
-    Vector3 crouchScale = new Vector3(1, 0.5f, 1); //change for how large you want when crouching
     public float extraGravity = 0.3f;
     
     //don't change these unless you are seriously changing functionality
     private float currentSpeed;
     public float cameraXrotation = 0f;
-    Vector3 playerScale = new Vector3(1, 1, 1);
 
     //references
     private Rigidbody rb;
-    public Camera camera;
     public Transform cameraHolder;
 
     //states
     bool isJumping = false;
     bool isGrounded = true;
     bool isCrouching = false;
+
+    public float headBobAmplitude = 2f;
+    public float headBobFrequency = 1f;
+    public float headBobSprintMult = 2f;
+    public float headBobLerpSpeed = 1f;
+    
+    public AudioSource stepAudio;
+
+    public List<AudioClip> stepClips;
 
 
     //getting some references, locking the mouse, and setting some defualt values
@@ -39,16 +43,16 @@ public class PlayerMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
     }
 
+    Vector3 _newCameraPos = new(0, .45f, 0);
+
+    public float minStepTriggerDist = .45f;
+    private bool hitSide = false;
+
     void Update() {
 
        //handle keyboard and mouse input
        HandleKeys(); 
        LookAtMouse();
-       
-       //jumping
-       //if (Input.GetButtonDown("Jump") && isGrounded) {
-       //    Jump();
-       //}
 
        //sprinting
        if (Input.GetKey(KeyCode.LeftShift) && !isJumping && !isCrouching) {
@@ -57,53 +61,63 @@ public class PlayerMovement : MonoBehaviour
             currentSpeed = walkingSpeed;
        }
 
-       //crouching (this is toggled)
-       if (Input.GetKeyDown(KeyCode.LeftControl)) {
-            if (isCrouching) {
-                UnCrouch();   
-            } else if(!isCrouching && !isJumping) {
-                Crouch();   
-            }
+       float mult = 1f;
+       
+       //If not doing input
+       if (input.x == 0 && input.z == 0)
+       {
+           //Dont do headbob
+           mult = 0;
        }
+       //Doing input
+       else
+       {
+           //If sprinting, then apply sprinting speed
+           if ((int)currentSpeed == (int)sprintingSpeed)
+           {
+               mult = headBobSprintMult;
+           }
+       }
+
+       //Calculate the height
+       float height = Mathf.Sin(Time.time * headBobFrequency * mult);
+       
+       //Set the newcamerapos
+       _newCameraPos.y = height * headBobAmplitude + .45f;
+
+       //If reaching bottom of sin wave
+       if (height <= minStepTriggerDist)
+       {
+           //Sound hasnt been played yet
+           if (hitSide)
+           {
+               //Play the sound
+               stepAudio.pitch = Random.Range(.9f, 1.1f);
+               stepAudio.clip = stepClips[Random.Range(0, stepClips.Count - 1)];
+               stepAudio.Play();
+               hitSide = false;
+           }
+       }
+       else
+       {
+           hitSide = true;
+       }
+       
+       //Lerp the position
+       cameraHolder.localPosition = Vector3.Lerp(cameraHolder.localPosition, _newCameraPos, headBobLerpSpeed * Time.deltaTime * headBobLerpSpeed);
 
        //extra gravity for more realistic jumping
        rb.AddForce(new Vector3(0, -extraGravity, 0), ForceMode.Impulse);       
     }
 
+    private Vector3 input;
     //handling user input (wasd) for moving
     void HandleKeys() {
-        Vector3 input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
+        input = new Vector3(Input.GetAxisRaw("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
         input = input.normalized;
         Vector3 forwardVel = transform.forward * currentSpeed * input.z;
         Vector3 horizontalVel = transform.right * currentSpeed * input.x;
         rb.velocity = horizontalVel + forwardVel + new Vector3(0, rb.velocity.y, 0);
-    }
-
-    //handling jumping
-    void Jump() {
-        currentSpeed = jumpingSpeed;
-        isGrounded = false;
-        isJumping = true;
-        rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
-        if (isCrouching) {
-            currentSpeed = crouchingSpeed;
-        }
-    }
-
-    //toggle crouch
-    void Crouch() {
-        currentSpeed = crouchingSpeed;
-        isCrouching = true;
-        transform.localScale = crouchScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y - 0.5f, transform.position.z);
-    }
-
-    //untoggle crouch
-    void UnCrouch() {
-        currentSpeed = walkingSpeed;
-        isCrouching = false;
-        transform.localScale = playerScale;
-        transform.position = new Vector3(transform.position.x, transform.position.y + 0.5f, transform.position.z);
     }
 
     //look at mouse
@@ -118,7 +132,7 @@ public class PlayerMovement : MonoBehaviour
         
         if (mouseY == 0)
         {
-            mouseY = Input.GetAxis("VerticalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
+            mouseY = -Input.GetAxis("VerticalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
         }
         
         
