@@ -9,10 +9,26 @@ Shader "PPU/Infrared" {
 
 			TEXTURE2D_SAMPLER2D(_MainTex, sampler_MainTex);
 			uniform half _Intensity;
+			float4 _Color;
+			half _brightness;
 
 			half3 Frag0 (VaryingsDefault i) : SV_Target {
 				half3 CameraOutput = 0.0;
-				CameraOutput = lerp(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).xyz, (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 0.33 ? lerp(0.0, half3(0.0, 0.0, 1.0), (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) * 3.0)) : (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 0.66 ? lerp(half3(0.0, 0.0, 1.0), half3(1.0, 0.0, 0.0), ((((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) - 0.33) * 3.0)) : (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 1.0 ? lerp(half3(1.0, 0.0, 0.0), 1.0, ((((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) - 0.66) * 3.0)) : 1.0))), _Intensity);
+				//CameraOutput = lerp(SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).xyz, (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 0.33 ? lerp(0.0, half3(0.0, 0.0, 1.0), (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) * 3.0)) : (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 0.66 ? lerp(half3(0.0, 0.0, 1.0), half3(1.0, 0.0, 0.0), ((((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) - 0.33) * 3.0)) : (((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) <= 1.0 ? lerp(half3(1.0, 0.0, 0.0), 1.0, ((((SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).x + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).y + SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo).z) / 3.0) - 0.66) * 3.0)) : 1.0))), _Intensity);
+
+				//Get the visuals from the camera (i think)
+				CameraOutput = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, i.texcoordStereo);
+
+				CameraOutput *= _brightness;
+
+				float val = _Color.w;
+
+				_Color.x = (_Color.x + val)/2;
+				_Color.y = (_Color.y + val)/2;
+				_Color.z = (_Color.z + val)/2;
+
+				//((CameraOutput+_Color)/2) * _Intensity;
+				CameraOutput = lerp(CameraOutput, _Color, _Intensity);
 				return CameraOutput;
 			}
 

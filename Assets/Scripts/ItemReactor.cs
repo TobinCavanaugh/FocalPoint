@@ -19,15 +19,29 @@ namespace DefaultNamespace
 
         public int gasCanRequirement = 4;
         public int curGasCan = 0;
-        
+
+        private Animator an;
+
+        private void Start()
+        {
+            an = GetComponent<Animator>();
+        }
+
         public void Interact()
         {
             if (pi.item.id == itemRequirement)
             {
-                interactEvent?.Invoke();
-                Destroy(pi.holdingItem);
-                pi.item = null;
-                pi.holdingItem = null;
+                if (!an.GetCurrentAnimatorStateInfo(0).IsName("Pour"))
+                {
+                    interactEvent?.Invoke();
+                    Destroy(pi.holdingItem);
+                    pi.item = null;
+                    pi.holdingItem = null;
+                }
+                else
+                {
+                       
+                }
             }
         }
 

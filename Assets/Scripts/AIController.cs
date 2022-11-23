@@ -55,6 +55,7 @@ namespace DefaultNamespace
         {
             Physics.Linecast(transform.position, playerTransform.position, out var hit);
 
+            //Sight line on player
             if (hit.transform.TryGetComponent(out PlayerMovement pm) && Vector3.Distance(transform.position, playerTransform.position) <= viewRange)
             {
                 oldSeenPosition = playerTransform.position;
@@ -66,6 +67,8 @@ namespace DefaultNamespace
 
                 agent.isStopped = false;
                 agent.speed = chaseSpeed;
+                
+                //Chase thing
                 for (int i = 0; i < 100; i++)
                 {
                     Debug.Log($"chase {i}/99");
@@ -74,6 +77,8 @@ namespace DefaultNamespace
                     animator.SetFloat(Speed, velocity);
                     yield return new WaitForSeconds(.2f);
                 }
+
+                agent.speed = defaultSpeed;
                 goto AfterChecks;
             }
 

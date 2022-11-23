@@ -6,7 +6,7 @@ Shader "PPU/Invert" {
 	HLSLINCLUDE
 
 			#include "Packages/com.unity.postprocessing/PostProcessing/Shaders/StdLib.hlsl"
-			#include "../../Post Processing Ultimate/Functions/Invert.hlsl"
+			#include "Assets/Simple Post Processing/Functions/Invert.hlsl"
 
 			TEXTURE2D_SAMPLER2D(_MainTex, sampler_MainTex);
 			uniform half _Intensity;

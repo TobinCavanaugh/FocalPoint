@@ -110,6 +110,17 @@ public class PlayerMovement : MonoBehaviour
     void LookAtMouse() {
         float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Mathf.Rad2Deg;
         float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Mathf.Rad2Deg;
+
+        if (mouseX == 0)
+        {
+            mouseX = Input.GetAxis("HorizontalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
+        }
+        
+        if (mouseY == 0)
+        {
+            mouseY = Input.GetAxis("VerticalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
+        }
+        
         
         transform.Rotate(transform.up * mouseX * mouseSens);
 

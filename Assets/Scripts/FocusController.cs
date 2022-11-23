@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering.PostProcessing;
 
 namespace DefaultNamespace
 {
     public class FocusController : MonoBehaviour
     {
+
+        [Button]
+        public void Thing()
+        {
+            var parameters = ppp.GetSetting<ColorGrading>().GetType().GetFields();
+            foreach (var p in parameters)
+            {
+                Debug.Log(p.Name);
+            }
+        }
+        
         public float sensitivity = 1f;
         public float maxFocusDistance = 50f;
         public float curFocusDistance = 1f;
 
         public float lerpSpeed = 1f;
-        public VolumeProfile ppp;
+        public PostProcessProfile ppp;
         private DepthOfField dof;
 
         public AudioClip clickClip;
@@ -26,10 +37,10 @@ namespace DefaultNamespace
         
         [ReadOnly]
         public int index = 0;
-
         private void Start()
         {
-            ppp.TryGet(out dof);
+            dof = ppp.GetSetting<DepthOfField>();
+            //ppp.TryGet(out dof);
             
             for (int i = 0; i < audioSourceCount; i++)
             {
@@ -42,14 +53,30 @@ namespace DefaultNamespace
             }
         }
 
+        private int BoolToInt(bool state)
+        {
+            if (state)
+            {
+                return 1;
+            }
+            else
+            {
+                return 0;
+            }
+        }
+
         private void Update()
         {
-            curFocusDistance += Input.mouseScrollDelta.y * sensitivity;
+            float scrollFac = Input.mouseScrollDelta.y;
 
-            curFocusDistance = Mathf.Clamp(curFocusDistance, 0, maxFocusDistance);
+            scrollFac += (BoolToInt(Input.GetKey(KeyCode.PageUp)) - BoolToInt(Input.GetKey(KeyCode.PageDown))) * .1f;
+            
+            scrollFac *= sensitivity;
+            
+            curFocusDistance = Mathf.Clamp(curFocusDistance + scrollFac, 0, maxFocusDistance);
             dof.focusDistance.value = Mathf.Lerp(dof.focusDistance.value, curFocusDistance, Time.deltaTime * lerpSpeed);
             
-            if (Input.mouseScrollDelta.y != 0)
+            if (scrollFac != 0)
             {
                 index++;
                 if (index >= sources.Count)
