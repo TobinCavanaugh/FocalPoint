@@ -9,7 +9,6 @@ namespace DefaultNamespace
 {
     public class FocusController : MonoBehaviour
     {
-
         [Button]
         public void Thing()
         {
@@ -19,7 +18,7 @@ namespace DefaultNamespace
                 Debug.Log(p.Name);
             }
         }
-        
+
         public float sensitivity = 1f;
         public float maxFocusDistance = 50f;
         public float curFocusDistance = 1f;
@@ -34,14 +33,14 @@ namespace DefaultNamespace
         private List<AudioSource> sources = new();
 
         public int audioSourceCount = 15;
-        
-        [ReadOnly]
-        public int index = 0;
+
+        [ReadOnly] public int index = 0;
+
         private void Start()
         {
             dof = ppp.GetSetting<DepthOfField>();
             //ppp.TryGet(out dof);
-            
+
             for (int i = 0; i < audioSourceCount; i++)
             {
                 var go = new GameObject().transform;
@@ -69,13 +68,13 @@ namespace DefaultNamespace
         {
             float scrollFac = Input.mouseScrollDelta.y;
 
-            scrollFac += (BoolToInt(Input.GetKey(KeyCode.PageUp)) - BoolToInt(Input.GetKey(KeyCode.PageDown))) * .1f;
-            
+            scrollFac += Input.GetAxis("FocusAxis") * .1f;
+
             scrollFac *= sensitivity;
-            
+
             curFocusDistance = Mathf.Clamp(curFocusDistance + scrollFac, 0, maxFocusDistance);
             dof.focusDistance.value = Mathf.Lerp(dof.focusDistance.value, curFocusDistance, Time.deltaTime * lerpSpeed);
-            
+
             if (scrollFac != 0)
             {
                 index++;
@@ -83,7 +82,7 @@ namespace DefaultNamespace
                 {
                     index = 0;
                 }
-                
+
                 sources[index].pitch = (curFocusDistance / maxFocusDistance + 1f) / 2f + .5f;
                 sources[index].Play();
             }

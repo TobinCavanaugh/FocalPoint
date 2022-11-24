@@ -20,11 +20,11 @@ namespace DefaultNamespace
         public int gasCanRequirement = 4;
         public int curGasCan = 0;
 
-        private Animator an;
+        public Animator an;
 
         private void Start()
         {
-            an = GetComponent<Animator>();
+            
         }
 
         public void Interact()

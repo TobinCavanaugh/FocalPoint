@@ -24,7 +24,7 @@ namespace DefaultNamespace
                 SceneManager.LoadScene(0);
             }
 
-            
+
             if (Input.GetButtonDown("Drop"))
             {
                 holdingItem.transform.parent = null;
@@ -39,7 +39,7 @@ namespace DefaultNamespace
             {
                 tmp.text = "Press Q to drop item";
             }
-            
+
             if (Physics.Raycast(transform.position, transform.forward, out var hit, range, lm))
             {
                 if (hit.transform.TryGetComponent(out ItemPickup ip) && holdingItem == null)
@@ -64,11 +64,17 @@ namespace DefaultNamespace
                 else if (hit.transform.TryGetComponent(out ItemReactor ir))
                 {
                     tmp.text = ir.GetText();
-                    
+
                     if (Input.GetButtonDown("Interact"))
                     {
                         ir.Interact();
                     }
+                }
+                else if (hit.transform.TryGetComponent(out GeneratorStartMiniGame mg))
+                {
+                    tmp.text = "Press E to pull rip cord";
+                    if (Input.GetButtonDown("Interact"))
+                        mg.Interact(this);
                 }
             }
         }
