@@ -94,7 +94,7 @@ public class GeneratorStartMiniGame : MonoBehaviour
 
     private void NewRandomSpot()
     {
-        randomPosParent.localEulerAngles = new Vector3(0, 0, Random.Range(60, 120));
+        randomPosParent.localEulerAngles = new Vector3(0, 0, Random.Range(70, 112));
     }
 
     private void StartGenerator()

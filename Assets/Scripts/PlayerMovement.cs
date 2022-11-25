@@ -16,7 +16,8 @@ public class PlayerMovement : MonoBehaviour
     public float cameraXrotation = 0f;
 
     //references
-    private Rigidbody rb;
+    [HideInInspector]
+    public Rigidbody rb;
     public Transform cameraHolder;
 
     //states

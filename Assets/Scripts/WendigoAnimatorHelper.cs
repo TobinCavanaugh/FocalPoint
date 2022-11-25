@@ -5,10 +5,10 @@ namespace DefaultNamespace
     public class WendigoAnimatorHelper : MonoBehaviour
     {
         public AudioSource roarSound;
-
         public void PlayRoarSound()
         {
             roarSound.Play();
+            
         }
 
 

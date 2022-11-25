@@ -35,7 +35,11 @@ namespace DefaultNamespace
         
         [ReadOnly]
         public float velocity;
-        
+
+        private bool chasing = false;
+
+
+        public float maxChaseTime = 12f;
         private void Start()
         {
             oldSeenPosition = patrolPositions[Random.Range(0, patrolPositions.Count - 1)].position;
@@ -46,70 +50,107 @@ namespace DefaultNamespace
         {
             velocity = Mathf.Lerp(velocity, Vector3.Distance(transform.position, previousPos) * 33f, Time.fixedDeltaTime);
             previousPos = transform.position;
+            animator.SetFloat(Speed, velocity);
         }
 
-        private WaitForSeconds wfs = new WaitForSeconds(.1f);
+        private const float UPDATE_TIME = .1f;
+        private WaitForSeconds wfs = new WaitForSeconds(UPDATE_TIME);
         private static readonly int Speed = Animator.StringToHash("Speed");
+
+        [SerializeField, ReadOnly]
+        private float chaseTime = 0;
 
         private IEnumerator AIUpdate()
         {
-            Physics.Linecast(transform.position, playerTransform.position, out var hit);
+            bool hasSightOnPlayer = SightlineOnPlayer();
 
-            //Sight line on player
-            if (hit.transform.TryGetComponent(out PlayerMovement pm) && Vector3.Distance(transform.position, playerTransform.position) <= viewRange)
+            if (chasing)
             {
-                oldSeenPosition = playerTransform.position;
-                Debug.Log("Seen player");
-                
-                animator.Play(roarAnimation);
-                agent.isStopped = true;
-                yield return new WaitForSeconds(Random.Range(5, 7));
-
-                agent.isStopped = false;
                 agent.speed = chaseSpeed;
+                agent.SetDestination(playerTransform.position);
+                chaseTime += UPDATE_TIME;
                 
-                //Chase thing
-                for (int i = 0; i < 100; i++)
+                //If max chase time has been exceeded
+                if (chaseTime >= maxChaseTime)
                 {
-                    Debug.Log($"chase {i}/99");
-                    oldSeenPosition = playerTransform.position;
-                    agent.SetDestination(oldSeenPosition);
-                    animator.SetFloat(Speed, velocity);
-                    yield return new WaitForSeconds(.2f);
-                }
+                    //If we lost sight of player, the chase is done
+                    if(!hasSightOnPlayer)
+                    {
+                        EndChase();
+                    }
 
-                agent.speed = defaultSpeed;
-                goto AfterChecks;
+                    //Reset value either way
+                    chaseTime = 0;
+                }
             }
-
-            //Checked old seen position
-            if (Vector3.Distance(oldSeenPosition, transform.position) <= 2f)
+            else
             {
-                // Ran into Player
-                if (Vector3.Distance(transform.position, playerTransform.position) <= 2f)
+                agent.speed = defaultSpeed;
+                //Initiate chase if we have sight
+                if (hasSightOnPlayer)
                 {
-                    oldSeenPosition = playerTransform.position;
-                    Debug.Log("Kill player");
+                    InitiateChase();   
                 }
+                //Otherwise do patrol stuff
                 else
                 {
-                    animator.Play(roarAnimation);
-                    agent.isStopped = true;
-                    yield return new WaitForSeconds(Random.Range(5, 7));
-                    oldSeenPosition = patrolPositions[Random.Range(0, patrolPositions.Count - 1)].position;
+                    if (Vector3.Distance(transform.position, agent.destination) <= 2f)
+                    {
+                        Scream();
+                        agent.SetDestination(GetRandomPatrolPoint());
+                    }
                 }
             }
 
-            AfterChecks:
-            
-            agent.isStopped = false;
-            agent.SetDestination(oldSeenPosition);
-            agent.speed = defaultSpeed;
-            animator.SetFloat(Speed, velocity);
-            
             yield return wfs;
             
             StartCoroutine(AIUpdate());
+        }
+
+        private Vector3 GetRandomPatrolPoint()
+        {
+            return patrolPositions[Random.Range(0, patrolPositions.Count)].position;
+        }
+
+        private bool SightlineOnPlayer()
+        {
+            Physics.Linecast(transform.position, playerTransform.position, out var hit);
+            if(hit.transform.TryGetComponent(out PlayerMovement pm))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void EndChase()
+        {
+            chasing = false;
+        }
+
+        private void InitiateChase()
+        {
+            chasing = true;
+            SetDestination(playerTransform.position);
+        }
+
+        public void SetDestination(Vector3 pos)
+        {
+            Scream();
+            agent.SetDestination(pos);
+        }
+
+        private void Scream()
+        {
+            agent.isStopped = true;
+            animator.Play(roarAnimation);
+            Invoke(nameof(ResetFromScream), 5.2f);
+            
+        }
+
+        private void ResetFromScream()
+        {
+            agent.isStopped = false;
         }
     }
 }

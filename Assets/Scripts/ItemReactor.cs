@@ -22,9 +22,9 @@ namespace DefaultNamespace
 
         public Animator an;
 
-        private void Start()
+        public void DestroyThisComponent()
         {
-            
+            Destroy(this);
         }
 
         public void Interact()

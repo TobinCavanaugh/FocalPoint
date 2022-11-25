@@ -21,7 +21,7 @@ public class SoundRandomizer : MonoBehaviour
 
     private float distance = 0;
 
-    private void Start()
+    private IEnumerator Start()
     {
         //lm = LayerMask.NameToLayer("Default");
 
@@ -39,7 +39,7 @@ public class SoundRandomizer : MonoBehaviour
             Debug.Log("couldnt raycast");
         }
         
-        
+        yield return new WaitForSeconds(Random.Range(minRandTime, maxRandTime));
         StartCoroutine(S());
     }
     private IEnumerator S()

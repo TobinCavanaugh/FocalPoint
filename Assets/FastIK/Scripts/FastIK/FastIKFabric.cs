@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace DitzelGames.FastIK
 {
+    [ExecuteAlways]
     /// <summary>
     /// Fabrik IK Solver
     /// </summary>
