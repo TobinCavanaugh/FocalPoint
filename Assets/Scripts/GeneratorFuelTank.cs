@@ -1,22 +1,19 @@
 ﻿using System;
+using UnityEditorInternal;
 using UnityEngine;
 using UnityEngine.Events;
 
 namespace DefaultNamespace
 {
-    public class ItemReactor : MonoBehaviour
+    public class GeneratorFuelTank : Interactable
     {
         public string failString = "You need a gas can";
-        
-        public string verb = "pour gas";
         public string itemRequirement = "gas_can";
 
         public UnityEvent interactEvent;
 
         public UnityEvent fullEvent;
-
-        public PlayerPickerUpper pi;
-
+        
         public int gasCanRequirement = 4;
         public int curGasCan = 0;
 
@@ -27,20 +24,25 @@ namespace DefaultNamespace
             Destroy(this);
         }
 
-        public void Interact()
+        private void Start()
         {
-            if (pi.item.id == itemRequirement)
+            _ppu = GameObject.FindObjectOfType<PlayerPickerUpper>();
+        }
+
+        public override void Interact(PlayerPickerUpper ppu)
+        {
+            _ppu = ppu;
+            
+            //If item matches
+            if (_ppu.item.id == itemRequirement)
             {
+                //If pour animation is not playing, we are good to go again 
                 if (!an.GetCurrentAnimatorStateInfo(0).IsName("Pour"))
                 {
                     interactEvent?.Invoke();
-                    Destroy(pi.holdingItem);
-                    pi.item = null;
-                    pi.holdingItem = null;
-                }
-                else
-                {
-                       
+                    Destroy(_ppu.holdingItem);
+                    _ppu.item = null;
+                    _ppu.holdingItem = null;
                 }
             }
         }
@@ -55,21 +57,16 @@ namespace DefaultNamespace
             } 
         }
 
-        public string GetText()
+        public override string GetHoverText()
         {
-            try
+            if (_ppu.item.id == itemRequirement && _ppu.item != null)
             {
-                if (pi.item.id == itemRequirement)
-                {
-                    return $"Press E to {verb}";
-                }
+                return $"Press {PlayerInput.instance.inputKey} to pour gas can ({curGasCan}/{gasCanRequirement})";
             }
-            catch (Exception e)
+            else
             {
-                return $"You need a gas can ({curGasCan}/{gasCanRequirement})";
+                return $"This isn't gas ({curGasCan}/{gasCanRequirement})";
             }
-            
-            return $"You need a gas can ({curGasCan}/{gasCanRequirement})";
         }
     }
 }

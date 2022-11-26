@@ -20,7 +20,7 @@ namespace DefaultNamespace
             stepSound.Play();
         }
 
-        public ItemReactor ir;
+        public GeneratorFuelTank ir;
 
         public void IncrementItemReactor()
         {

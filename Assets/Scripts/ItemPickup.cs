@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultNamespace
 {
-    public class ItemPickup : MonoBehaviour
+    public class ItemPickup : Interactable
     {
         public Vector3 rotOffset;
         public Vector3 positionOffset;
@@ -16,6 +16,22 @@ namespace DefaultNamespace
         private void Start()
         {
             originalScale = transform.localScale;
+        }
+
+        public override void Interact(PlayerPickerUpper ppu)
+        {
+            ppu.holdingItem = gameObject;
+            var t = ppu.holdingItem.transform;
+            t.parent = ppu.transform;
+            t.localPosition = positionOffset;
+            t.localEulerAngles = rotOffset;
+            t.localScale = scaleOffset;
+            ppu.item = this;
+            
+            if (t.TryGetComponent(out Rigidbody rb))
+            {
+                Destroy(rb);
+            }
         }
     }
 }

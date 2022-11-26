@@ -3,7 +3,7 @@ using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GeneratorStartMiniGame : MonoBehaviour
+public class GeneratorStartMiniGame : Interactable
 {
     public Camera playerCamera;
     public PlayerMovement pm;
@@ -29,7 +29,7 @@ public class GeneratorStartMiniGame : MonoBehaviour
     private int countToStart = 7;
     private int curCount = 0;
 
-    public void Interact(PlayerPickerUpper ppu)
+    public override void Interact(PlayerPickerUpper ppu)
     {
         _ppu = ppu;
         ToggleSettings(true);
@@ -62,7 +62,7 @@ public class GeneratorStartMiniGame : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Cancel"))
+        if (Input.GetKeyDown(PlayerInput.instance.exitKey))
         {
             ToggleSettings(false);
         }

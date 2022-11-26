@@ -42,40 +42,51 @@ namespace DefaultNamespace
 
             if (Physics.Raycast(transform.position, transform.forward, out var hit, range, lm))
             {
-                if (hit.transform.TryGetComponent(out ItemPickup ip) && holdingItem == null)
+                if (hit.transform.TryGetComponent(out Interactable inter))
                 {
-                    tmp.text = $"Press E to pick this up";
-
-                    if (Input.GetButtonDown("Interact"))
+                    tmp.text = inter.GetHoverText();
+                    if (Input.GetKeyDown(PlayerInput.instance.inputKey))
                     {
-                        holdingItem = ip.gameObject;
-                        var t = holdingItem.transform;
-                        t.parent = this.transform;
-                        t.localPosition = ip.positionOffset;
-                        t.localEulerAngles = ip.rotOffset;
-                        t.localScale = ip.scaleOffset;
-                        item = ip;
-                        if (t.TryGetComponent(out Rigidbody rb))
-                        {
-                            Destroy(rb);
-                        }
+                        inter.Interact(this);
                     }
                 }
-                else if (hit.transform.TryGetComponent(out ItemReactor ir))
-                {
-                    tmp.text = ir.GetText();
-
-                    if (Input.GetButtonDown("Interact"))
-                    {
-                        ir.Interact();
-                    }
-                }
-                else if (hit.transform.TryGetComponent(out GeneratorStartMiniGame mg))
-                {
-                    tmp.text = "Press E to pull rip cord";
-                    if (Input.GetButtonDown("Interact"))
-                        mg.Interact(this);
-                }
+                // if (hit.transform.TryGetComponent(out ItemPickup ip) && holdingItem == null)
+                // {
+                //     tmp.text = $"Press E to pick this up";
+                //
+                //     if (Input.GetButtonDown("Interact"))
+                //     {
+                //         holdingItem = ip.gameObject;
+                //         var t = holdingItem.transform;
+                //         t.parent = this.transform;
+                //         t.localPosition = ip.positionOffset;
+                //         t.localEulerAngles = ip.rotOffset;
+                //         t.localScale = ip.scaleOffset;
+                //         item = ip;
+                //         if (t.TryGetComponent(out Rigidbody rb))
+                //         {
+                //             Destroy(rb);
+                //         }
+                //     }
+                // }
+                // else if (hit.transform.TryGetComponent(out GeneratorFuelTank ir))
+                // {
+                //     tmp.text = ir.GetText();
+                //
+                //     if (Input.GetButtonDown("Interact"))
+                //     {
+                //         ir.Interact();
+                //     }
+                // } else if (hit.transform.TryGetComponent(out LookText text))
+                // {
+                //     tmp.text = text.GetText();
+                // }
+                // else if (hit.transform.TryGetComponent(out GeneratorStartMiniGame mg))
+                // {
+                //     tmp.text = "Press E to pull rip cord";
+                //     if (Input.GetButtonDown("Interact"))
+                //         mg.Interact(this);
+                // }
             }
         }
     }

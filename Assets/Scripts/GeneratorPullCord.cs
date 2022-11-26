@@ -27,7 +27,6 @@ public class GeneratorPullCord : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             if (hovering && !triggered)
             {
-
                 Vector2 dat = Input.mousePosition;
 
                 //Get dat as center of screen
@@ -36,11 +35,11 @@ public class GeneratorPullCord : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
                 // Divide by screen width and height to get it between 0 and 1
                 dat /= new Vector2(Screen.width, Screen.height);
-                
+
                 //Multiply by the corresponding screen dimension, divided by its corresponding 16:9 value, and multiply it by its mult
                 //I got a confession, i got no clue how this works, but i found it by my sleep addled mind
                 dat *= new Vector2(multX * (Screen.width / 16f), multY * (Screen.height / 9));
-                
+
                 transform.localPosition = dat;
                 mesh.LookAt(new Vector3(lerpSpot.position.x, mesh.position.y, lerpSpot.position.z));
             }
@@ -50,14 +49,14 @@ public class GeneratorPullCord : MonoBehaviour, IPointerEnterHandler, IPointerEx
             //mesh.localEulerAngles = Vector3.Lerp(mesh.localEulerAngles, new(0,-90,-90), Time.deltaTime * lerpSpeed);
             mesh.localRotation = Quaternion.Lerp(mesh.localRotation, Quaternion.Euler(new(0, -90, -90)),
                 Time.deltaTime * lerpSpeed * .01f);
-            
+
             transform.position = Vector3.Lerp(transform.position, lerpSpot.position, Time.deltaTime * lerpSpeed);
             if (Vector3.Distance(transform.position, lerpSpot.position) < .05f)
             {
                 triggered = false;
             }
         }
-        
+
         //If right near the triggerpos
         if (Vector3.Distance(transform.position, triggerPos.position) <= triggerDistance && !triggered)
         {
@@ -66,9 +65,6 @@ public class GeneratorPullCord : MonoBehaviour, IPointerEnterHandler, IPointerEx
             pullSource.Play();
             gsmg.CordPulled();
         }
-        
-        
-
     }
 
     public void OnPointerEnter(PointerEventData eventData)

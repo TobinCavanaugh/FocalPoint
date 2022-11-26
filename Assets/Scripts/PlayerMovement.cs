@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.Serialization.Json;
+using DefaultNamespace;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -62,7 +63,7 @@ public class PlayerMovement : MonoBehaviour
             LookAtMouse();
 
         //sprinting
-        if (Input.GetKey(KeyCode.LeftShift) && !isJumping && !isCrouching)
+        if (Input.GetKey(PlayerInput.instance.sprintKey) && !isJumping && !isCrouching)
         {
             currentSpeed = sprintingSpeed;
         }

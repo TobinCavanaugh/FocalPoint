@@ -112,8 +112,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d826a12c4b8c4fc0a1b06776665c28bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  verb: pick up
+  noun: this
+  overrideText: 0
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls: []
   rotOffset: {x: -96, y: 212, z: -317}
   positionOffset: {x: 0.29, y: -0.166, z: 0.433}
   scaleOffset: {x: 0.6, y: 0.6, z: 0.6}
-  id: 
+  id: grease_can
   originalScale: {x: 0, y: 0, z: 0}
