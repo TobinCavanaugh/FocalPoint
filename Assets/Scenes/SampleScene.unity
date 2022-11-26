@@ -1127,6 +1127,10 @@ PrefabInstance:
       value: 0.050995216
       objectReference: {fileID: 0}
     - target: {fileID: -1592263606299639531, guid: 6d366c3f5fa9bb54f93342ee50e22dd0, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -1592263606299639531, guid: 6d366c3f5fa9bb54f93342ee50e22dd0, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 03c73ece594da074dbfc867c673ec333, type: 2}
@@ -2406,6 +2410,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2532268706521325735, guid: 017c06f02599d824bb42db33495d737d, type: 3}
   m_PrefabInstance: {fileID: 1719074711}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &87314751 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+  m_PrefabInstance: {fileID: 2143470055}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &88703239 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2532268706521325735, guid: 017c06f02599d824bb42db33495d737d, type: 3}
@@ -2569,7 +2578,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 103912341}
-  - component: {fileID: 103912342}
   m_Layer: 0
   m_Name: Room - Elevator
   m_TagString: Untagged
@@ -2590,71 +2598,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7280442729222052237}
+  - {fileID: 591528607}
   - {fileID: 5109653149974348860}
   m_Father: {fileID: 0}
   m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &103912342
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 103912340}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4aec63359be74ebc8bfb3a1c8881856d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  failString: You need a gas can
-  verb: pour gas
-  itemRequirement: gas_can
-  interactEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 144007873}
-        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
-        m_MethodName: Play
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Pour
-          m_BoolArgument: 0
-        m_CallState: 2
-  fullEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
-        m_MethodName: set_enabled
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: DefaultNamespace.ItemReactor, Assembly-CSharp
-        m_MethodName: DestroyThisComponent
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-  pi: {fileID: 963194232}
-  gasCanRequirement: 4
-  curGasCan: 0
-  an: {fileID: 144007873}
 --- !u!1001 &107153552
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5297,6 +5245,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4227602474377619840, guid: 27f1813a76c81534bb9c01bbf558db5b, type: 3}
   m_PrefabInstance: {fileID: 1607660519}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &222261346
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1917032813}
+    m_Modifications:
+    - target: {fileID: 4529804322573894443, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_Name
+      value: Gas Can Labelled (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_RootOrder
+      value: 234
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.964
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.443
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -77.398
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.10581942
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.96212196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.13358158
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.21279003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -164.90201
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 23.255005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 12.684998
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
 --- !u!4 &224260224 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 936321616523362486, guid: dd7337c30777b4a4a8aa21c9cbbdf590, type: 3}
@@ -12756,6 +12761,71 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1421809601544362093, guid: 2bf0cd15de810c242a619d1f24752b8a, type: 3}
   m_PrefabInstance: {fileID: 406743834}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &442643962
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 442643963}
+  - component: {fileID: 442643965}
+  - component: {fileID: 442643964}
+  m_Layer: 0
+  m_Name: Cube
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &442643963
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442643962}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 2.4333, z: 3.3703}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5109653149974348860}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &442643964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442643962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85eb36b40b24ff048a3048bf2a45bf0b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 5125537700329995701}
+  elevatorMove: ElevatorMove
+  pm: {fileID: 998161134}
+  aic: {fileID: 664046876}
+  wendigoViewPos: {fileID: 5109653149974348860}
+  wendigoJumpcareCollider: {fileID: 237761829}
+  active: 0
+--- !u!65 &442643965
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 442643962}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &444966550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14365,6 +14435,37 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b13e500141c12641b954901ab23176e, type: 3}
+--- !u!1 &591528606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 591528607}
+  m_Layer: 0
+  m_Name: WendigoTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &591528607
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 591528606}
+  m_LocalRotation: {x: 0.35355315, y: -0.61237264, z: -0.61237264, w: -0.3535531}
+  m_LocalPosition: {x: 1.72, y: -24.531, z: 2.487}
+  m_LocalScale: {x: 1, y: 2.4333, z: 3.3703003}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 103912341}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &593385857 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
@@ -15151,7 +15252,7 @@ GameObject:
   m_Layer: 0
   m_Name: '[AI CONTROLLER]'
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -20702,8 +20803,8 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
-  m_Intensity: 2.33
+  m_Color: {r: 0.11816931, g: 0, b: 1, a: 1}
+  m_Intensity: 0.58
   m_Range: 52.14
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -26455,6 +26556,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c58ff2d134889c4b81d187636155a0f, type: 3}
+--- !u!4 &1697830815 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+  m_PrefabInstance: {fileID: 2081250041}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1699724187
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -29025,6 +29131,9 @@ Transform:
   - {fileID: 782628378}
   - {fileID: 1591929550}
   - {fileID: 1795603474}
+  - {fileID: 87314751}
+  - {fileID: 1937675092}
+  - {fileID: 1697830815}
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -29109,6 +29218,11 @@ Transform:
 Transform:
   m_CorrespondingSourceObject: {fileID: 7247600546107534877, guid: 6e1e3ce73d4162b4a8cd6519a6a87fa3, type: 3}
   m_PrefabInstance: {fileID: 420334366}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1937675092 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+  m_PrefabInstance: {fileID: 222261346}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1941778936 stripped
 Transform:
@@ -30867,6 +30981,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2080135982}
   m_CullTransparentMesh: 1
+--- !u!1001 &2081250041
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1917032813}
+    m_Modifications:
+    - target: {fileID: 4529804322573894443, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_Name
+      value: Gas Can Labelled (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_RootOrder
+      value: 235
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -39.709
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.428
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -76.896
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.10581942
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.96212196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.13358158
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.21279003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -164.90201
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 23.255005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 12.684998
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
 --- !u!1001 &2081820728
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -31474,6 +31645,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1421809601544362093, guid: 194bdce6203d3584b91435fd81205269, type: 3}
   m_PrefabInstance: {fileID: 2138320831}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2143470055
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 1917032813}
+    m_Modifications:
+    - target: {fileID: 4529804322573894443, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_Name
+      value: Gas Can Labelled (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_RootOrder
+      value: 233
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -40.232
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.558
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -77.878
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.10581942
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.96212196
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.13358158
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.21279003
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -164.90201
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 23.255005
+      objectReference: {fileID: 0}
+    - target: {fileID: 8142651242549129061, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 12.684998
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 283c3815fbd79c24d907f61e23dd0fa2, type: 3}
 --- !u!4 &83163903837206220
 Transform:
   m_ObjectHideFlags: 0
@@ -33713,13 +33941,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5125537700329995699}
   m_LocalRotation: {x: 0.35355315, y: -0.61237264, z: -0.61237264, w: -0.3535531}
-  m_LocalPosition: {x: 0.030456543, y: -23.521738, z: -0.43981934}
+  m_LocalPosition: {x: 0.03045654, y: -23.521738, z: -0.4398193}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4664293278130998562}
+  - {fileID: 442643963}
   m_Father: {fileID: 103912341}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: -240}
 --- !u!1 &5125537700329995699
 GameObject:
@@ -33733,6 +33962,7 @@ GameObject:
   - component: {fileID: 3867025517599198752}
   - component: {fileID: 439585246022574972}
   - component: {fileID: 5125537700329995700}
+  - component: {fileID: 5125537700329995701}
   m_Layer: 0
   m_Name: Elevator
   m_TagString: Untagged
@@ -33754,6 +33984,26 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -2745519390412981159, guid: 2c35369cf330a6845b33a6cbbf2135ce, type: 3}
+--- !u!95 &5125537700329995701
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5125537700329995699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6aaa207b7c3b23146b38680086cef807, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &5186180753543499007
 GameObject:
   m_ObjectHideFlags: 0
@@ -34205,6 +34455,7 @@ GameObject:
   - component: {fileID: 4875750956610581094}
   - component: {fileID: 7280442729222052238}
   - component: {fileID: 7280442729222052240}
+  - component: {fileID: 7280442729222052241}
   m_Layer: 0
   m_Name: Generator
   m_TagString: Untagged
@@ -34576,7 +34827,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6305148235646314597}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2be5d8c19890a44eb230bcecb12fb5e, type: 3}
   m_Name: 
@@ -34638,11 +34889,84 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 442643964}
+        m_TargetAssemblyTypeName: ElevatorCollider, Assembly-CSharp
+        m_MethodName: Activate
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
   particleSystems: []
   randomPosParent: {fileID: 1310875341}
   anim: {fileID: 1887926600}
   animation: Spin
   countToStart: 7
+--- !u!114 &7280442729222052241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6305148235646314597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4aec63359be74ebc8bfb3a1c8881856d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  failString: You need a gas can
+  verb: pour gas
+  itemRequirement: gas_can
+  interactEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 144007873}
+        m_TargetAssemblyTypeName: UnityEngine.Animator, UnityEngine
+        m_MethodName: Play
+        m_Mode: 5
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: Pour
+          m_BoolArgument: 0
+        m_CallState: 2
+  fullEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7280442729222052240}
+        m_TargetAssemblyTypeName: UnityEngine.Behaviour, UnityEngine
+        m_MethodName: set_enabled
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 7280442729222052241}
+        m_TargetAssemblyTypeName: DefaultNamespace.ItemReactor, Assembly-CSharp
+        m_MethodName: DestroyThisComponent
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  pi: {fileID: 963194232}
+  gasCanRequirement: 4
+  curGasCan: 0
+  an: {fileID: 144007873}
 --- !u!1 &7329665308085157621
 GameObject:
   m_ObjectHideFlags: 0
