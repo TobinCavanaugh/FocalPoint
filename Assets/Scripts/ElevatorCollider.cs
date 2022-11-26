@@ -3,15 +3,15 @@ using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class ElevatorCollider : MonoBehaviour
 {
-    public Animator animator;
-    public string elevatorMove;
     public PlayerMovement pm;
     public AIController aic;
     public Transform wendigoViewPos;
-    public GameObject wendigoJumpcareCollider;
+
+    public UnityEvent enterEvent;
 
     public bool active = false;
 
@@ -29,10 +29,9 @@ public class ElevatorCollider : MonoBehaviour
 
         if (other.gameObject.CompareTag("Player"))
         {
+            enterEvent?.Invoke();
             pm.canMove = false;
             aic.SetDestination(wendigoViewPos.position);
-            wendigoJumpcareCollider.SetActive(false);
-            animator.Play(elevatorMove);
         }
     }
 }
