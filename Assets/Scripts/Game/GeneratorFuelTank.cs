@@ -58,7 +58,12 @@ namespace Game
 
         public override string GetHoverText()
         {
-            if (_ppu.item.id == itemRequirement && _ppu.item != null)
+            if (_ppu.item == null)
+            {
+                return $"This isn't gas ({curGasCan}/{gasCanRequirement})";
+            }
+            
+            if (_ppu.item.id == itemRequirement)
             {
                 return $"Press {PlayerInput.instance.inputKey} to pour gas can ({curGasCan}/{gasCanRequirement})";
             }
