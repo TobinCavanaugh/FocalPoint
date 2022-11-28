@@ -41,10 +41,10 @@ namespace UnityEngine.PostProcessing
             [Min(0f), Tooltip("Adaptation speed from a light to a dark environment.")]
             public float speedDown;
 
-            [Range(-16, -1), Tooltip("Lower bound for the brightness range of the generated histogram (in EV). The bigger the spread between min & max, the lower the precision will be.")]
+            [Range(-16, -1), Tooltip("Lower bound for the brightness pickupRange of the generated histogram (in EV). The bigger the spread between min & max, the lower the precision will be.")]
             public int logMin;
 
-            [Range(1, 16), Tooltip("Upper bound for the brightness range of the generated histogram (in EV). The bigger the spread between min & max, the lower the precision will be.")]
+            [Range(1, 16), Tooltip("Upper bound for the brightness pickupRange of the generated histogram (in EV). The bigger the spread between min & max, the lower the precision will be.")]
             public int logMax;
 
             public static Settings defaultSettings

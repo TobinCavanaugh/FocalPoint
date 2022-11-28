@@ -148,7 +148,7 @@ namespace UnityEditor.PostProcessing
             // Background
             DrawRect(0, 0, m_RangeX, m_RangeY, 0.1f, 0.4f);
 
-            // Soft-knee range
+            // Soft-knee pickupRange
             DrawRect(m_GraphThreshold - m_GraphKnee, 0, m_GraphThreshold + m_GraphKnee, m_RangeY, 0.25f, -1);
 
             // Horizontal lines

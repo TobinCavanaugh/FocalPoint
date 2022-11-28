@@ -40,7 +40,7 @@ namespace UnityEditor.PostProcessing
             if (!GraphicsUtils.supportsDX11)
                 EditorGUILayout.HelpBox("This effect requires support for compute shaders. Enabling it won't do anything on unsupported platforms.", MessageType.Warning);
 
-            EditorGUILayout.LabelField("Luminosity range", EditorStyles.boldLabel);
+            EditorGUILayout.LabelField("Luminosity pickupRange", EditorStyles.boldLabel);
             EditorGUI.indentLevel++;
             EditorGUILayout.PropertyField(m_LogMin, EditorGUIHelper.GetContent("Minimum (EV)"));
             EditorGUILayout.PropertyField(m_LogMax, EditorGUIHelper.GetContent("Maximum (EV)"));
@@ -52,7 +52,7 @@ namespace UnityEditor.PostProcessing
             float low = m_LowPercent.floatValue;
             float high = m_HighPercent.floatValue;
 
-            EditorGUILayout.MinMaxSlider(EditorGUIHelper.GetContent("Histogram filtering|These values are the lower and upper percentages of the histogram that will be used to find a stable average luminance. Values outside of this range will be discarded and won't contribute to the average luminance."), ref low, ref high, 1f, 99f);
+            EditorGUILayout.MinMaxSlider(EditorGUIHelper.GetContent("Histogram filtering|These values are the lower and upper percentages of the histogram that will be used to find a stable average luminance. Values outside of this pickupRange will be discarded and won't contribute to the average luminance."), ref low, ref high, 1f, 99f);
 
             m_LowPercent.floatValue = low;
             m_HighPercent.floatValue = high;

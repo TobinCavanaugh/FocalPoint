@@ -82,7 +82,7 @@ namespace UnityEngine.PostProcessing
             [Range(0f, 2f), Tooltip("Pushes the intensity of all colors.")]
             public float saturation;
 
-            [Range(0f, 2f), Tooltip("Expands or shrinks the overall range of tonal values.")]
+            [Range(0f, 2f), Tooltip("Expands or shrinks the overall pickupRange of tonal values.")]
             public float contrast;
 
             public static BasicSettings defaultSettings
