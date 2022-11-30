@@ -9,16 +9,6 @@ namespace DefaultNamespace
 {
     public class FocusController : MonoBehaviour
     {
-        [Button]
-        public void Thing()
-        {
-            var parameters = ppp.GetSetting<ColorGrading>().GetType().GetFields();
-            foreach (var p in parameters)
-            {
-                Debug.Log(p.Name);
-            }
-        }
-
         public float sensitivity = 1f;
         public float maxFocusDistance = 50f;
         public float curFocusDistance = 1f;
@@ -39,11 +29,11 @@ namespace DefaultNamespace
         private void Start()
         {
             dof = ppp.GetSetting<DepthOfField>();
-            //ppp.TryGet(out dof);
 
+            //Create audiosources
             for (int i = 0; i < audioSourceCount; i++)
             {
-                var go = new GameObject().transform;
+                var go = new GameObject($"{i} - ClickSound").transform;
                 go.parent = this.transform;
                 go.transform.localPosition = Vector3.zero;
                 var source = go.gameObject.AddComponent<AudioSource>();
@@ -52,37 +42,28 @@ namespace DefaultNamespace
             }
         }
 
-        private int BoolToInt(bool state)
-        {
-            if (state)
-            {
-                return 1;
-            }
-            else
-            {
-                return 0;
-            }
-        }
-
         private void Update()
         {
+            //Get scroll values
             float scrollFac = Input.mouseScrollDelta.y;
-
             scrollFac += Input.GetAxis("FocusAxis") * .1f;
-
             scrollFac *= sensitivity;
 
+            //Clamp and lerp the value and set the DOF
             curFocusDistance = Mathf.Clamp(curFocusDistance + scrollFac, 0, maxFocusDistance);
             dof.focusDistance.value = Mathf.Lerp(dof.focusDistance.value, curFocusDistance, Time.deltaTime * lerpSpeed);
 
+            //If we is scrollin
             if (scrollFac != 0)
             {
+                //Increment index and wrap its value around
                 index++;
                 if (index >= sources.Count)
                 {
                     index = 0;
                 }
 
+                // Set the sound pitch. IDK how this works out mathematically, but it works :)
                 sources[index].pitch = (curFocusDistance / maxFocusDistance + 1f) / 2f + .5f;
                 sources[index].Play();
             }

@@ -19,7 +19,7 @@ namespace Game
         public Transform playerTransform;
         
         [SerializeField,FoldoutGroup(NAVIGATION)]
-        private float maxChaseTime = 12f;
+        private float maxChaseTime = 5f;
         
         [FoldoutGroup(NAVIGATION)]
         public List<Transform> patrolPositions;
@@ -72,21 +72,30 @@ namespace Game
 
         private const float UPDATE_TIME = .1f;
         private WaitForSeconds wfs = new (UPDATE_TIME);
-        private static readonly int SpeedProperty = Animator.StringToHash("SpeedProperty");
+        private static readonly int SpeedProperty = Animator.StringToHash("Speed");
 
         [SerializeField, ReadOnly]
         private float chaseTime = 0;
 
+        [HideInInspector]
+        public bool hasSightOnPlayer;
+        
         private IEnumerator AIUpdate()
         {
-            bool hasSightOnPlayer = SightLineOnPlayer();
+            hasSightOnPlayer = SightLineOnPlayer();
 
             if (_chasing)
             {
                 agent.speed = chaseSpeed;
                 agent.SetDestination(playerTransform.position);
                 chaseTime += UPDATE_TIME;
-                
+
+                //Reset chase if we see player gain
+                if (hasSightOnPlayer)
+                {
+                    chaseTime = 0;
+                }
+
                 //If max chase time has been exceeded
                 if (chaseTime >= maxChaseTime)
                 {
@@ -184,7 +193,7 @@ namespace Game
         private void Scream()
         {
             agent.isStopped = true;
-            animator.Play(roarAnimation);
+            animator.CrossFade(roarAnimation, .2f);
             Invoke(nameof(ResetFromScream), 5.2f);
         }
 

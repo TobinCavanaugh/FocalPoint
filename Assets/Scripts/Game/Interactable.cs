@@ -8,21 +8,21 @@ namespace Game
 {
     public class Interactable : MonoBehaviour
     {
-        private const string INTERACTION_TEXT = "Interaction Text";
+        private const string INTERACTION = "Interaction Base";
 
         #region Interaction Text
 
-        [SerializeField, FoldoutGroup(INTERACTION_TEXT), HideIf(nameof(overrideText))] 
+        [SerializeField, FoldoutGroup(INTERACTION), HideIf(nameof(overrideText))] 
         private string verb;
-        [SerializeField, FoldoutGroup(INTERACTION_TEXT)] 
+        [SerializeField, FoldoutGroup(INTERACTION)] 
         private string noun;
-        [SerializeField, FoldoutGroup(INTERACTION_TEXT)] 
-        private bool overrideText = false; 
-        
+        [SerializeField, FoldoutGroup(INTERACTION)] 
+        private bool overrideText = false;
+        [SerializeField, FoldoutGroup(INTERACTION)]
+        internal UnityEvent interactEvent;
+
         #endregion
 
-        [SerializeField]
-        internal UnityEvent interactEvent;
 
         internal PlayerPickerUpper _ppu;
 

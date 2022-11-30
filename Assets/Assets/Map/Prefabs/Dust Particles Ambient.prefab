@@ -4941,9 +4941,9 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 0
-  MaxDistance: 15
+  MaxDistance: 6.074562
   Pan2D: 0
-  rolloffMode: 2
+  rolloffMode: 1
   BypassEffects: 0
   BypassListenerEffects: 0
   BypassReverbZones: 0
@@ -5064,10 +5064,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSource: {fileID: 4227602473607918034}
-  maxRandomPitch: 1.1
-  minRandomPitch: 0.9
-  minRandTime: 15
-  maxRandTime: 56
+  minRandTime: 25
+  maxRandTime: 55
+  _doShake: 1
+  _shakePreset: {fileID: 11400000, guid: 4681852fa25049f429edac80ac05d903, type: 2}
+  _minShakeDist: 6.1
   ps: {fileID: 4227602475547025230}
 --- !u!205 &8624251827406311932
 LODGroup:
