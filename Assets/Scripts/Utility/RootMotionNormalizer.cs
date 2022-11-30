@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Utility
 {
     /// <summary>
     /// Basically just continually sets the x and z positions to 0, as well as setting the Y axis rotation to 0

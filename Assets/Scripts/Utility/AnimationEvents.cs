@@ -1,7 +1,7 @@
 ﻿using Game;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Utility
 {
     public class AnimationEvents : MonoBehaviour
     {
@@ -9,7 +9,6 @@ namespace DefaultNamespace
         public void PlayRoarSound()
         {
             roarSound.Play();
-            
         }
 
 
@@ -26,6 +25,11 @@ namespace DefaultNamespace
         public void IncrementItemReactor()
         {
             ir.Increment();
+        }
+
+        public void ResetXYZCoords()
+        {
+            transform.localPosition = Vector3.zero;
         }
     }
 }

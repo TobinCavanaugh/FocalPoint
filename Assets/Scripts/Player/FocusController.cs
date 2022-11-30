@@ -29,6 +29,7 @@ namespace DefaultNamespace
         private void Start()
         {
             dof = ppp.GetSetting<DepthOfField>();
+            dof.focusDistance.value = 0;
 
             //Create audiosources
             for (int i = 0; i < audioSourceCount; i++)
