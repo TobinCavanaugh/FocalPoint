@@ -1,21 +1,22 @@
 using System.Collections;
-using DefaultNamespace;
 using Game;
 using UnityEngine;
 
 public class JumpscareCollider : MonoBehaviour
 {
-
     public Animator animator;
     public string jumpscareClip;
-    
+
     public GameObject oldBody;
     public GameObject scareBody;
-    
+
     public Transform spawnPos;
     private PlayerMovement _pm;
 
     public AIController controller;
+    
+    [SerializeField] private AIController _aiController;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.TryGetComponent(out PlayerMovement pm))
@@ -27,7 +28,6 @@ public class JumpscareCollider : MonoBehaviour
 
     public IEnumerator JumpScare()
     {
-        
         oldBody.SetActive(false);
         scareBody.SetActive(true);
         _pm.enabled = false;
@@ -37,12 +37,14 @@ public class JumpscareCollider : MonoBehaviour
         animator.Play(jumpscareClip);
 
         yield return new WaitForSeconds(1.2f);
-        
-        
+
+
         oldBody.SetActive(true);
         scareBody.SetActive(false);
         _pm.enabled = true;
         controller.enabled = true;
         _pm.transform.position = spawnPos.position;
+
+        _aiController.SetDestinationToElevatorRoom();
     }
 }

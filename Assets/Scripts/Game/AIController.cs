@@ -24,6 +24,8 @@ namespace Game
         [FoldoutGroup(NAVIGATION)]
         public List<Transform> patrolPositions;
 
+        [FoldoutGroup(NAVIGATION), SerializeField] 
+        private Transform elevatorRoom;
 
         #endregion
 
@@ -53,6 +55,8 @@ namespace Game
         public float velocity;
         
         #endregion
+
+        public AudioSource playerHeartbeat;
 
         private bool _chasing = false;
         private Vector3 _previousPos;
@@ -86,6 +90,8 @@ namespace Game
 
             if (_chasing)
             {
+                playerHeartbeat.volume = Mathf.Lerp(playerHeartbeat.volume, 1, Time.deltaTime);
+                
                 agent.speed = chaseSpeed;
                 agent.SetDestination(playerTransform.position);
                 chaseTime += UPDATE_TIME;
@@ -111,6 +117,8 @@ namespace Game
             }
             else
             {
+                playerHeartbeat.volume = Mathf.Lerp(playerHeartbeat.volume, 0, Time.deltaTime);
+
                 agent.speed = defaultSpeed;
                 
                 //Initiate chase if we have sight
@@ -185,6 +193,11 @@ namespace Game
         {
             Scream();
             agent.SetDestination(pos);
+        }
+
+        public void SetDestinationToElevatorRoom()
+        {
+            ExternalSetDestination(elevatorRoom.position);
         }
         
         /// <summary>
