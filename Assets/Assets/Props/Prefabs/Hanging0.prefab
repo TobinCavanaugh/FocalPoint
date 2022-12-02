@@ -175,6 +175,9 @@ MonoBehaviour:
   audioSource: {fileID: 6039991052031552549}
   minRandTime: 3.75
   maxRandTime: 7.05
+  _doShake: 0
+  _shakePreset: {fileID: 0}
+  _minShakeDist: 3
   ps: {fileID: 4439768527535029931}
 --- !u!1 &1624851445503171089
 GameObject:

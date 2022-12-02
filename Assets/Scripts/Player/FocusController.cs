@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
+using UnityEngine.UI;
 
 namespace DefaultNamespace
 {
@@ -23,6 +25,11 @@ namespace DefaultNamespace
         public int audioSourceCount = 15;
 
         [ReadOnly] public int index = 0;
+
+        public bool inMainMenu = false;
+        
+        [ShowIf(nameof(inMainMenu))]
+        public Image focusImage;
 
         private void Start()
         {
@@ -65,6 +72,16 @@ namespace DefaultNamespace
                 // Set the sound pitch. IDK how this works out mathematically, but it works :)
                 sources[index].pitch = (curFocusDistance / maxFocusDistance + 1f) / 2f + .5f;
                 sources[index].Play();
+                
+                
+                if (inMainMenu)
+                {
+                    var v = DOVirtual.Color(focusImage.color, new Color(256,256,256,0), 2f, x =>
+                    {
+                        focusImage.color = x;
+                    });
+                    v.onComplete += () => { focusImage.gameObject.SetActive(false); };
+                }
             }
         }
     }
