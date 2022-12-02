@@ -25,13 +25,9 @@ public class DripSoundPlacer : MonoBehaviour
     public ParticleSystem ps;
 
     private float distance = 0;
-
-    private Transform player;
-
+    
     private IEnumerator Start()
     {
-        player = GameObject.FindObjectOfType<PlayerMovement>().transform;
-        
         //These are the layers to drip on
         _lm |= (1 << LayerMask.NameToLayer("Default"));
         _lm |= (1 << LayerMask.NameToLayer("Water"));
@@ -55,7 +51,7 @@ public class DripSoundPlacer : MonoBehaviour
     }
     private IEnumerator S()
     {
-        if(_doShake && Vector3.Distance(audioSource.transform.position, player.position) <= _minShakeDist)
+        if(_doShake && Vector3.Distance(audioSource.transform.position, Shaker.GlobalShakers[0].transform.position) <= _minShakeDist)
             Shaker.GlobalShakers[0].Shake(_shakePreset);
         
         //Play particle system

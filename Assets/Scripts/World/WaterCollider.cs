@@ -11,7 +11,7 @@ public class WaterCollider : MonoBehaviour
 
     private void Start()
     {
-        _aiController = FindObjectOfType<AIController>();
+        
         _movement = FindObjectOfType<PlayerMovement>();
     }
 
@@ -21,6 +21,11 @@ public class WaterCollider : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
+            if (_aiController is null)
+            {
+                _aiController = FindObjectOfType<AIController>();
+            }
+            
             if (!_aiController.hasSightOnPlayer)
             {
                 _aiController.ExternalSetDestination(_movement.transform.position);

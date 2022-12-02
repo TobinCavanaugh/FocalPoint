@@ -10,7 +10,7 @@ namespace UI
         public void SetPage(int pageNum)
         {
             pages.ForEach(x => x.SetActive(false));
-            pages[pageNum].SetActive(false);
+            pages[pageNum].SetActive(true);
         }
     }
 }
