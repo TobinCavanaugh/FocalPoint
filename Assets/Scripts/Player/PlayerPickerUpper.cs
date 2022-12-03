@@ -28,7 +28,7 @@ namespace Player
             var itext = "";
 
             //Dropping item here
-            if (Input.GetKey(PlayerInput.instance.dropKey))
+            if (Input.GetKey(PlayerInput.instance.dropKey) && holdingItem != null)
             {
                 holdingItem.transform.parent = null;
                 holdingItem.AddComponent<Rigidbody>();

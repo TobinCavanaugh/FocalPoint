@@ -29,7 +29,7 @@ namespace DefaultNamespace
         public bool inMainMenu = false;
         
         [ShowIf(nameof(inMainMenu))]
-        public Image focusImage;
+        public RawImage focusImage;
 
         private void Start()
         {

@@ -65,11 +65,11 @@ namespace Game
             
             if (_ppu.item.id == itemRequirement)
             {
-                return $"Press {PlayerInput.instance.inputKey} to pour gas can ({curGasCan}/{gasCanRequirement})";
+                return $"Press {PlayerInput.instance.inputKey} to pour gas can into generator ({curGasCan}/{gasCanRequirement})";
             }
             else
             {
-                return $"This isn't gas ({curGasCan}/{gasCanRequirement})";
+                return $"This generator only takes gas ({curGasCan}/{gasCanRequirement})";
             }
         }
     }

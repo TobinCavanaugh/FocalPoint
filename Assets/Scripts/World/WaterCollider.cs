@@ -24,6 +24,12 @@ public class WaterCollider : MonoBehaviour
             if (_aiController is null)
             {
                 _aiController = FindObjectOfType<AIController>();
+                
+                // Couldnt find AI
+                if (_aiController is null)
+                {
+                    return;
+                }
             }
             
             if (!_aiController.hasSightOnPlayer)

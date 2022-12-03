@@ -1,6 +1,4 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Runtime.Serialization.Json;
 using DefaultNamespace;
 using UnityEngine;
 
@@ -46,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         currentSpeed = walkingSpeed;
         cameraHolder.eulerAngles = new Vector3(0, 0, 0);
         Cursor.lockState = CursorLockMode.Locked;
+        TogglePause(false);
     }
 
     Vector3 _newCameraPos = new(0, .45f, 0);
@@ -120,6 +119,23 @@ public class PlayerMovement : MonoBehaviour
 
         //extra gravity for more realistic jumping
         rb.AddForce(new Vector3(0, -extraGravity, 0), ForceMode.Impulse);
+
+        if (Input.GetKeyDown(PlayerInput.instance.exitKey))
+        {
+            TogglePause(!curState);
+        }
+    }
+
+    private bool curState;
+    
+    public GameObject pauseMenu;
+    public void TogglePause(bool state)
+    {
+        curState = state;
+        pauseMenu.SetActive(state);
+        Cursor.visible = state;
+        Cursor.lockState = state ? CursorLockMode.Confined : CursorLockMode.Locked;
+        canLook = !state;
     }
 
     private Vector3 input;
