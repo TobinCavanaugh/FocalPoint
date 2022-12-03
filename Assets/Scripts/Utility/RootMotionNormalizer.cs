@@ -14,7 +14,7 @@ namespace Utility
             transform.localEulerAngles = new(lea.x, 0, lea.z);
 
             var tp = transform.localPosition;
-            transform.localPosition = new(0, tp.y, 0);
+            transform.localPosition = new(0, 0, 0);
         }
     }
 }

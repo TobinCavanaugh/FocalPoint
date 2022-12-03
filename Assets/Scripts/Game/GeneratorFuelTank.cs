@@ -60,7 +60,7 @@ namespace Game
         {
             if (_ppu.item == null)
             {
-                return $"This isn't gas ({curGasCan}/{gasCanRequirement})";
+                return $"This generator takes gas, I don't have any right now ({curGasCan}/{gasCanRequirement})";
             }
             
             if (_ppu.item.id == itemRequirement)
