@@ -1,9 +1,7 @@
-﻿using System;
-using Game;
-using Player;
+﻿using Player;
 using UnityEngine;
 
-namespace DefaultNamespace
+namespace Game
 {
     public class ItemPickup : Interactable
     {

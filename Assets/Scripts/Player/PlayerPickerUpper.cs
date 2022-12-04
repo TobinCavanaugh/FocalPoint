@@ -1,5 +1,4 @@
-﻿using DefaultNamespace;
-using Game;
+﻿using Game;
 using TMPro;
 using UnityEngine;
 
@@ -23,7 +22,7 @@ namespace Player
         public GameObject holdingItem;
         public ItemPickup item;
 
-        private void Update()
+        private void LateUpdate()
         {
             var itext = "";
 

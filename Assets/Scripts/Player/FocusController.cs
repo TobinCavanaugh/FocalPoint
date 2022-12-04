@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DG.Tweening;
+using Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.Rendering.PostProcessing;
@@ -53,7 +54,7 @@ namespace DefaultNamespace
             //Get scroll values
             float scrollFac = Input.mouseScrollDelta.y;
             scrollFac += Input.GetAxis("FocusAxis") * .1f;
-            scrollFac *= sensitivity;
+            scrollFac *= sensitivity * PlayerInput.instance.focusSensitivity;
 
             //Clamp and lerp the value and set the DOF
             curFocusDistance = Mathf.Clamp(curFocusDistance + scrollFac, 0, maxFocusDistance);

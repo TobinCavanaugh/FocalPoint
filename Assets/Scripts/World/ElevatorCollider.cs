@@ -1,34 +1,38 @@
 using Game;
+using Player;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class ElevatorCollider : MonoBehaviour
+namespace World
 {
-    public PlayerMovement pm;
-    public AIController aic;
-    public Transform wendigoViewPos;
-
-    public UnityEvent enterEvent;
-
-    public bool active = false;
-
-    public void Activate()
+    public class ElevatorCollider : MonoBehaviour
     {
-        active = true;
-    }
+        public PlayerMovement pm;
+        public AIController aic;
+        public Transform wendigoViewPos;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!active)
+        public UnityEvent enterEvent;
+
+        public bool active = false;
+
+        public void Activate()
         {
-            return;
+            active = true;
         }
 
-        if (other.gameObject.CompareTag("Player"))
+        private void OnTriggerEnter(Collider other)
         {
-            enterEvent?.Invoke();
-            pm.canMove = false;
-            aic.ExternalSetDestination(wendigoViewPos.position);
+            if (!active)
+            {
+                return;
+            }
+
+            if (other.gameObject.CompareTag("Player"))
+            {
+                enterEvent?.Invoke();
+                pm.canMove = false;
+                aic.ExternalSetDestination(wendigoViewPos.position);
+            }
         }
     }
 }

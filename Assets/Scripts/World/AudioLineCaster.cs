@@ -1,8 +1,6 @@
-
-using System;
 using UnityEngine;
 
-namespace Game
+namespace World
 {
     [RequireComponent(typeof(AudioSource))]
     public class AudioLineCaster : MonoBehaviour

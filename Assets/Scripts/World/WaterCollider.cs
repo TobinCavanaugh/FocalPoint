@@ -1,40 +1,43 @@
-using System;
 using Game;
+using Player;
 using UnityEngine;
 
-public class WaterCollider : MonoBehaviour
+namespace World
 {
-    public AudioSource audioSource;
-    
-    private AIController _aiController;
-    private PlayerMovement _movement;
-
-    private void Start()
+    public class WaterCollider : MonoBehaviour
     {
-        
-        _movement = FindObjectOfType<PlayerMovement>();
-    }
+        public AudioSource audioSource;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        audioSource.Play();
+        private AIController _aiController;
+        private PlayerMovement _movement;
 
-        if (other.CompareTag("Player"))
+        private void Start()
         {
-            if (_aiController is null)
+
+            _movement = FindObjectOfType<PlayerMovement>();
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            audioSource.Play();
+
+            if (other.CompareTag("Player"))
             {
-                _aiController = FindObjectOfType<AIController>();
-                
-                // Couldnt find AI
                 if (_aiController is null)
                 {
-                    return;
+                    _aiController = FindObjectOfType<AIController>();
+
+                    // Couldnt find AI
+                    if (_aiController is null)
+                    {
+                        return;
+                    }
                 }
-            }
-            
-            if (!_aiController.hasSightOnPlayer)
-            {
-                _aiController.ExternalSetDestination(_movement.transform.position);
+
+                if (!_aiController.hasSightOnPlayer)
+                {
+                    _aiController.ExternalSetDestination(_movement.transform.position);
+                }
             }
         }
     }

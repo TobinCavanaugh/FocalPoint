@@ -13,11 +13,11 @@ namespace Game
         #region Interaction Text
 
         [SerializeField, FoldoutGroup(INTERACTION), HideIf(nameof(overrideText))] 
-        private string verb;
+        internal string verb;
         [SerializeField, FoldoutGroup(INTERACTION)] 
-        private string noun;
+        internal string noun;
         [SerializeField, FoldoutGroup(INTERACTION)] 
-        private bool overrideText = false;
+        internal bool overrideText = false;
         [SerializeField, FoldoutGroup(INTERACTION)]
         internal UnityEvent interactEvent;
 
@@ -50,6 +50,12 @@ namespace Game
             {
                 return $"Press {PlayerInput.instance.inputKey.ToString()} to {verb} {noun}";
             }
+        }
+
+        public virtual void SetOverrideText(string dat)
+        {
+            overrideText = true;
+            noun = dat;
         }
     }
 }

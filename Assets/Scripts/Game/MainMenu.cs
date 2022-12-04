@@ -1,13 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class MainMenu : MonoBehaviour
+namespace Game
 {
-    // Start is called before the first frame update
-    void Start()
+    public class MainMenu : MonoBehaviour
     {
-        Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+        // Start is called before the first frame update
+        void Start()
+        {
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+        }
     }
 }

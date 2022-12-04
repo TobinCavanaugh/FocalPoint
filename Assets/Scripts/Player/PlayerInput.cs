@@ -2,7 +2,7 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace DefaultNamespace
+namespace Player
 {
     public class PlayerInput : MonoBehaviour
     {
@@ -13,6 +13,8 @@ namespace DefaultNamespace
         public KeyCode sprintKey = KeyCode.LeftShift;
         public KeyCode dropKey = KeyCode.Q;
 
+        public float focusSensitivity = 1f;
+         
         public List<KeyCode> reloadKeys = new()
         {
             KeyCode.R,

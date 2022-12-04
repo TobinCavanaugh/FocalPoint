@@ -1,5 +1,4 @@
 using System.Linq;
-using DefaultNamespace;
 using Player;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -72,8 +71,19 @@ namespace Game
 
         public override void Interact(PlayerPickerUpper ppu)
         {
-            _ppu = ppu;
-            ToggleSettings(true);
+            
+            base.Interact(ppu);
+            Debug.Log("Interaction");
+
+            if (_playerFlashlight.enabled)
+            {
+                ToggleSettings(true);
+            }
+            else
+            {
+                ToggleSettings(false);   
+            }
+            
             NewRandomSpot();
         }
 
@@ -85,28 +95,36 @@ namespace Game
         {
             _playerMovement.canLook = !state;
             _playerMovement.canMove = !state;
-            _ppu.enabled = !state;
             _playerCamera.enabled = !state;
             _miniGameCamera.SetActive(state);
             Cursor.visible = state;
             _playerMesh.enabled = !state;
             _playerFlashlight.enabled = !state;
-
+            
             if (state)
             {
+                overrideText = true;
+                noun = "Click and drag the pullcord to the green circle"; 
                 Cursor.lockState = CursorLockMode.Confined;
             }
             else
             {
+                overrideText = false;
+                noun = "";
                 Cursor.lockState = CursorLockMode.Locked;
             }
         }
-
-        private void Update()
+        
+        private void Start()
         {
-            if (Input.GetKeyDown(PlayerInput.instance.exitKey))
+            _ppu = _playerCamera.GetComponent<PlayerPickerUpper>();
+        }
+
+        private void LateUpdate()
+        {
+            if (!_ppu.enabled)
             {
-                ToggleSettings(false);
+                _ppu.tmp.text = $"Press {PlayerInput.instance.inputKey} to exit";
             }
         }
 
@@ -135,7 +153,7 @@ namespace Game
         /// </summary>
         private void NewRandomSpot()
         {
-            _randomPosParent.localPosition = new Vector3(Random.Range(-1, 1), Random.Range(-1.3f, -.5f), 0);
+            _randomPosParent.localPosition = new Vector3(Random.Range(15, 70), Random.Range(-40, 40), 0);
             //_randomPosParent.localEulerAngles = new Vector3(0, 0, Random.Range(70, 112));
         }
 

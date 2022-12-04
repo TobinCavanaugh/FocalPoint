@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace DefaultNamespace
+namespace Utility
 {
     public class LineRendererPositionioner : MonoBehaviour
     {

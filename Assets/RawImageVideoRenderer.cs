@@ -3,55 +3,58 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(RawImage))]
-public class RawImageVideoRenderer : MonoBehaviour
+namespace UI
 {
-    public List<Texture2D> textures;
-
-    private RawImage _rawImage;
-
-    public int fps = 60;
-
-    private bool playing = true;
-
-    [SerializeField]
-    public bool Playing
+    [RequireComponent(typeof(RawImage))]
+    public class RawImageVideoRenderer : MonoBehaviour
     {
-        get { return playing;}
-        set
+        public List<Texture2D> textures;
+
+        private RawImage _rawImage;
+
+        public int fps = 60;
+
+        private bool playing = true;
+
+        [SerializeField]
+        public bool Playing
         {
-            playing = true;
+            get { return playing;}
+            set
+            {
+                playing = true;
+                StartCoroutine(Tick());
+            }
+        }
+    
+    
+        private WaitForSeconds _waitForSeconds;
+        private void Start()
+        {
+            _waitForSeconds = new WaitForSeconds(1f/fps);
+            _rawImage = GetComponent<RawImage>();
             StartCoroutine(Tick());
         }
-    }
-    
-    
-    private WaitForSeconds _waitForSeconds;
-    private void Start()
-    {
-        _waitForSeconds = new WaitForSeconds(1f/fps);
-        _rawImage = GetComponent<RawImage>();
-        StartCoroutine(Tick());
-    }
 
-    private int index = 0;
-    private IEnumerator Tick()
-    {
-        if (playing)
+        private int index = 0;
+        private IEnumerator Tick()
         {
-            yield return null;
-        }
+            if (playing)
+            {
+                yield return null;
+            }
         
-        _rawImage.texture = textures[index];
-        index++;
+            _rawImage.texture = textures[index];
+            index++;
 
-        if (index >= textures.Count)
-        {
-            index = 0;
+            if (index >= textures.Count)
+            {
+                index = 0;
+            }
+        
+            yield return _waitForSeconds;
+        
+            StartCoroutine(Tick());
         }
-        
-        yield return _waitForSeconds;
-        
-        StartCoroutine(Tick());
     }
 }
