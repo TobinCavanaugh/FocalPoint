@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,7 +15,32 @@ namespace Player
         public KeyCode dropKey = KeyCode.Q;
 
         public float focusSensitivity = 1f;
-         
+        public float mouseSensitivity = 1f;
+
+        public void SetInputKey(string input)
+        {
+            input = input.ToUpper();
+            input = input.Substring(0, 1);
+            inputKey = Enum.Parse<KeyCode>(input);
+        }
+
+        public void SetDropKey(string input)
+        {
+            input = input.ToUpper();
+            input = input.Substring(0, 1);
+            dropKey = Enum.Parse<KeyCode>(input);
+        }
+
+        public void SetFocusSensitivity(float value)
+        {
+            focusSensitivity = value;
+        }
+
+        public void SetMouseSensitivity(float value)
+        {
+            mouseSensitivity = value;
+        }
+        
         public List<KeyCode> reloadKeys = new()
         {
             KeyCode.R,
@@ -30,6 +56,7 @@ namespace Player
             else
             {
                 instance = this;
+                DontDestroyOnLoad(this);
             }
         }
 

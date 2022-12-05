@@ -167,8 +167,13 @@ namespace Player
                 mouseY = -Input.GetAxis("VerticalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
             }
 
+            float nSens = 1f;
+            if (PlayerInput.instance is not null)
+            {
+                nSens = PlayerInput.instance.mouseSensitivity;
+            }
 
-            transform.Rotate(transform.up * mouseX * mouseSens);
+            transform.Rotate(transform.up * mouseX * mouseSens * nSens);
 
             cameraXrotation -= mouseY * mouseSens;
             //change these two values for however much you want to clamp looking up and down.

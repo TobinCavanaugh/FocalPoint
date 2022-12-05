@@ -1,6 +1,8 @@
 using System.Collections;
+using DG.Tweening;
 using Player;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Game
 {
@@ -14,8 +16,10 @@ namespace Game
 
         public Transform spawnPos;
         private PlayerMovement _pm;
+        
+        public Transform teleportPos;
 
-        public AIController controller;
+        public Image uiBlocker;
     
         [SerializeField] private AIController _aiController;
 
@@ -30,24 +34,35 @@ namespace Game
 
         public IEnumerator JumpScare()
         {
-            oldBody.SetActive(false);
-            scareBody.SetActive(true);
-            _pm.enabled = false;
-            _pm.rb.velocity = Vector3.zero;
-            controller.enabled = false;
+            ToggleSettings(true);
 
             animator.Play(jumpscareClip);
 
             yield return new WaitForSeconds(1.2f);
 
+            uiBlocker.color = Color.black;
+            
+            ToggleSettings(false);
 
-            oldBody.SetActive(true);
-            scareBody.SetActive(false);
-            _pm.enabled = true;
-            controller.enabled = true;
             _pm.transform.position = spawnPos.position;
 
-            _aiController.SetDestinationToElevatorRoom();
+            _aiController.transform.position = teleportPos.position;
+
+            yield return new WaitForSeconds(2);
+
+            DOVirtual.Color(uiBlocker.color, Color.clear, 2f, c =>
+            {
+                uiBlocker.color = c;
+            });
+        }
+
+        private void ToggleSettings(bool state)
+        {
+            oldBody.SetActive(!state);
+            scareBody.SetActive(state);
+            _pm.enabled = !state;
+            _pm.rb.velocity = Vector3.zero;
+            _aiController.enabled = !state;
         }
     }
 }

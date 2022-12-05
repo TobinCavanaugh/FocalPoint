@@ -196,11 +196,6 @@ namespace Game
             agent.SetDestination(pos);
         }
 
-        public void SetDestinationToElevatorRoom()
-        {
-            ExternalSetDestination(elevatorRoom.position);
-        }
-        
         /// <summary>
         ///Plays the scream animation and stops the AI
         /// </summary>

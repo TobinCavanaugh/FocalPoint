@@ -54,7 +54,13 @@ namespace DefaultNamespace
             //Get scroll values
             float scrollFac = Input.mouseScrollDelta.y;
             scrollFac += Input.GetAxis("FocusAxis") * .1f;
-            scrollFac *= sensitivity * PlayerInput.instance.focusSensitivity;
+
+            float addSens = 1f;
+            if (PlayerInput.instance is not null)
+            {
+                addSens = PlayerInput.instance.focusSensitivity;
+            }
+            scrollFac *= sensitivity * addSens;
 
             //Clamp and lerp the value and set the DOF
             curFocusDistance = Mathf.Clamp(curFocusDistance + scrollFac, 0, maxFocusDistance);
