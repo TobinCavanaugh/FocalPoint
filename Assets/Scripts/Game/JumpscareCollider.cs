@@ -45,6 +45,7 @@ namespace Game
             ToggleSettings(false);
 
             _pm.transform.position = spawnPos.position;
+            _aiController.ExternalSetDestination(_aiController.transform.position);
 
             _aiController.transform.position = teleportPos.position;
 
