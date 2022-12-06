@@ -1,6 +1,6 @@
 ﻿using System;
+using Player;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,17 +12,49 @@ namespace UI
         public string afterFloat;
         public TextMeshProUGUI tmp;
         public Slider slider;
-
+        public SensTypes stype;
+        public AudioSource clickSource;
+        
         private void Start()
         {
             slider = GetComponent<Slider>();
-            slider.onValueChanged.AddListener(x => SetText(x));
+            slider.onValueChanged.AddListener(x => SetValue());
+
+            
+            if (stype == SensTypes.Focus)
+            {
+                slider.value = PlayerInput.instance.focusSensitivity;
+            } else if (stype == SensTypes.Mouse)
+            {
+                slider.value = PlayerInput.instance.mouseSensitivity;
+            }
+            
+            SetValue();
         }
 
-        public void SetText(float value)
+        private float oldVal;
+        public void SetValue()
         {
-            value = (float) Math.Round(value, 1);
-            tmp.text = beforeFloat + value + afterFloat;
+            float val = RoundedValue(slider.value);
+            slider.value = val;
+
+            if (val - oldVal != 0)
+            {
+                clickSource.Play();
+            }
+            
+            oldVal = val;
+            tmp.text = beforeFloat + val + afterFloat;
         }
+
+        private float RoundedValue(float val)
+        {
+            return (float)Math.Round(val, 1);
+        }
+    }
+
+    public enum SensTypes
+    {
+        Focus, Mouse
     }
 }
