@@ -154,8 +154,17 @@ namespace Player
         //look at mouse
         void LookAtMouse()
         {
-            float mouseX = Input.GetAxis("Mouse X") * Time.deltaTime * Mathf.Rad2Deg;
-            float mouseY = Input.GetAxis("Mouse Y") * Time.deltaTime * Mathf.Rad2Deg;
+            
+            float nSens = 1f;
+            if (PlayerInput.instance is not null)
+            {
+                nSens = PlayerInput.instance.mouseSensitivity;
+            }
+
+            float val = Time.deltaTime * Mathf.Rad2Deg * mouseSens * nSens;
+            
+            float mouseX = Input.GetAxis("Mouse X") * val;
+            float mouseY = Input.GetAxis("Mouse Y") * val;;
 
             if (mouseX == 0)
             {
@@ -167,15 +176,11 @@ namespace Player
                 mouseY = -Input.GetAxis("VerticalKeeb") * Time.deltaTime * Mathf.Rad2Deg;
             }
 
-            float nSens = 1f;
-            if (PlayerInput.instance is not null)
-            {
-                nSens = PlayerInput.instance.mouseSensitivity;
-            }
 
-            transform.Rotate(transform.up * mouseX * mouseSens * nSens);
 
-            cameraXrotation -= mouseY * mouseSens;
+            transform.Rotate(transform.up * mouseX * mouseSens);
+
+            cameraXrotation -= mouseY;
             //change these two values for however much you want to clamp looking up and down.
             cameraXrotation = Mathf.Clamp(cameraXrotation, -61f, 90f);
             cameraHolder.localRotation = Quaternion.Euler(cameraXrotation, 0f, 0f);
