@@ -1,5 +1,7 @@
 # FocalPoint
 
+https://tobincavanaugh.itch.io/focal-point
+
 ### A horror game based around the mechanic of using the scrollwheel to adjust the cameras focal point.
 <img src="https://github.com/TobinCavanaugh/FocalPoint/blob/main/GithubMarkdown/FocalPointMMGif.gif">
 
